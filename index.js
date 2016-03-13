@@ -10,7 +10,7 @@ var http = require('http'),
     fs = require('fs');
 
 
-fs.readFile('./bitstarter.html', function (err, html) {
+fs.readFile('bitstarter.html', function (err, html) {
     if (err) {
         throw err; 
     }       
@@ -24,3 +24,4 @@ fs.readFile('./bitstarter.html', function (err, html) {
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
+

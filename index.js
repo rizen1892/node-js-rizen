@@ -4,7 +4,7 @@ var filename = 'bitstarter.html';
 var buf = fs.readFileSync(filename, "utf8");
 
 http.createServer(function start(resp) {
-    fs.readFileSync('bitstarter.html', 'utf8', function(err,data){
+    fs.readFileSync('bitstarter.html', function(err,data){
     resp.writeHead(200, {'Content-type':'text/html','Content-Length':data.length});
     resp.write(data);
     resp.end();

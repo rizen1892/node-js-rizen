@@ -12,18 +12,52 @@
 //  console.log("Node app is running at localhost:" + app.get('port'))
 //})
 
-var http = require('http'),
-    fs = require('fs');
 
+var http = require("http");
+var url = require('url');
+var fs = require('fs');
 
-fs.readFile('./bitstarter.html', function (err, html) {
-    if (err) {
-        throw err; 
-    }       
-    http.createServer(function(request, response) {  
-        response.writeHeader(200, {"Content-Type": "text/html"});  
-        response.write(html);  
-        response.end();  
-    }).listen(5000);
+var server = http.createServer(function(request, response){
+    console.log('Connection');
+    var path = url.parse(request.url).pathname;
+
+    switch(path){
+        case '/':
+            response.writeHead(200, {'Content-Type': 'text/html'});
+            response.write('hello world');
+            response.end();
+            break;
+        case '/bitstarter.html':
+            fs.readFile(/home/ubuntu/CMPE172/HW2/bitstarter.html, function(error,data){
+                console.log("error: " + error);
+                console.log("data: " + data);
+                if (error){
+                    response.writeHead(404);
+                    response.write("oops problem loading this page - 404");
+                }
+                else{
+                    response.writeHead(200, {"Content-Type": "text/html"});
+                    response.write(data);
+                }
+
+                response.end();
+            });
+            break;
+        default:
+            response.writeHead(404);
+            response.write("oops this page doesn't exist - 404");
+            response.end();
+            break;
+    }
 });
-console.log('Server is running.')
+
+
+
+      
+
+
+
+
+
+
+

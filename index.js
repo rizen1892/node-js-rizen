@@ -1,13 +1,15 @@
-
+var http = require('http');
 var fs = require("fs");
-var filename = "bitstarter.html";
+var filename = 'bitstarter.html';
 var buf = fs.readFileSync(filename, "utf8");
 
-function start(resp) {
-    resp.writeHead(200, {"Content-type":"text/html"});
-    resp.write(buf);
+http.createServer(function start(resp) {
+    fs.readFileSync('bitstarter.html', 'utf8', function(err,data){
+    resp.writeHead(200, {'Content-type':'text/html','Content-Length':data.length});
+    resp.write(data);
     resp.end();
-    }
+    });
+});
 
 
 

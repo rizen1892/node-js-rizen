@@ -6,19 +6,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
  )
-var http = require('http'),
-    fs = require('fs');
-
-
-fs.readFile('bitstarter.html', function (err, html) {
-    if (err) {
-        throw err; 
-    }       
-    	http.createServer(function(request, response) {  
-        response.writeHeader(200, {"Content-Type": "text/html"});  
-        response.write(html);  
-        response.end();  
-    }).listen(8000);
+response.sendfile('index.html') 
 });
 
 app.listen(app.get('port'), function() {

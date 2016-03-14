@@ -1,4 +1,13 @@
 
+var fs = require("fs");
+var filename = "bitstarter.html";
+var buf = fs.readFileSync(filename, "utf8");
+
+function start(resp) {
+    resp.writeHead(200, {"Content-type":"text/html"});
+    resp.write(buf);
+    resp.end();
+    }
 
 
 
@@ -36,8 +45,7 @@
 
 
 
-
-
+/*
 var http = require('http');
 var fs = require('fs');
   http.createServer(function(req, res){
@@ -49,3 +57,5 @@ var fs = require('fs');
 }).listen(process.env.PORT||5000);
 
  console.log('Listen me at http://localhost:3000');
+
+*/
